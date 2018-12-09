@@ -1,0 +1,43 @@
+<style>
+ 
+</style>
+<h2>List of users </h2>
+<?php use Phalcon\Tag; ?>
+<div class="row">
+    <nav>
+        <ul class="pager">
+            <li class="next"><?php echo $this->tag->linkTo(["signup", "SignUp "]); ?></li>
+        </ul>
+    </nav>
+</div>
+
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th></th>
+    <th>Id</th> 
+    <th>Name</th> 
+    <th>Email</th>
+    <th></th> 
+  </tr> 
+ </head>
+     <?php 
+  
+     foreach ($page->items as $item) 
+     { ?> 
+  <tr> 
+      <td><?php echo $this->tag->linkTo(["users/edit/" . $item->id, "Edit"]); ?></td>           
+     <td>
+       <?php echo $item->id; ?></td> 
+       <td id="name"><?php echo $item->name; ?>
+       </td> <td><?php echo $item->email; ?></td> 
+       <td><?php echo $this->tag->linkTo(["users/delete/" . $item->id, "Delete"]); ?></td>
+   </tr> <?php } ?>
+</table>
+
+
+<a href="/users/pages/1">First</a> 
+<a href="/users/pages/<?=$page->before;?>">Previous</a> 
+<a href="/users/pages/<?=$page->next;?>">Next</a> 
+<a href="/users/pages/<?=$page->last;?>">Last</a> 
+<?php echo "You are in page ", $page->current, " of ", $page->total_pages; ?>
